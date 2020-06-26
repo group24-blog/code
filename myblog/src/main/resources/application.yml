@@ -8,7 +8,7 @@ spring:
   datasource:
     url : jdbc:mysql://localhost:3306/myblog?serverTimezone=UTC
     username : root
-    password : 1999April0321
+    password :
     driverClassName : com.mysql.cj.jdbc.Driver
   jpa:
     database : MYSQL
