@@ -14,7 +14,6 @@ public class Blog {
     @ManyToOne
     private User articleUser;
     private String articleContent;
-
     @OneToMany
     private List<Comment> articleComment = new ArrayList<>();
     @Id

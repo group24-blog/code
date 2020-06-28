@@ -10,12 +10,14 @@ import java.util.List;
 @Entity
 @Data
 public class User {
-
-    private String name;
     @Id
-    private int id;
+    private String account;
+    private String sex;
+    private String name;
     private String password;
     private String photo;
+    private String introduction;
+    private String email;
     @Temporal(TemporalType.DATE)
     private Date  time;
     @OneToMany(mappedBy = "articleUser")
@@ -37,8 +39,44 @@ public class User {
         return friends;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public Date getTime() {
         return time;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
+
+    public String getIntroduction() {
+        return introduction;
     }
 
     public String getPhoto() {
@@ -53,24 +91,12 @@ public class User {
         this.time = time;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {
         return password;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public void setPassword(String password) {

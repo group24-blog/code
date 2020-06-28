@@ -5,22 +5,56 @@ package com.group24.demo.controller;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.web.bind.annotation.*;
 
+        import java.text.SimpleDateFormat;
+        import java.util.Date;
         import java.util.List;
 
 
 @RestController
-@RequestMapping("/login")
+@RequestMapping("/user")
 public class UserHandler {
     @Autowired
     private UserRepository userRepository;
 
-   @PostMapping("/user")
-    public String login(@RequestBody User user){
-      String check=userRepository.findByName(user.getName()).getPassword();
-      System.out.println(check);
-      if(check==null)
-          return "fail";
-      else
-          return check;
+   @PostMapping("/login")
+    public Boolean login(@RequestBody User user) {
+       System.out.println(user.getAccount());
+       System.out.println(user.getPassword());
+       User userCheck = userRepository.findByAccount(user.getAccount());
+       System.out.println(user.getAccount());
+       System.out.println(userCheck);
+       if (userCheck.getPassword().equals(user.getPassword()))
+           return true;
+       else
+           return false;
+   }
+   @GetMapping("/get_user_info")
+    public User getInfo(User user) {
+       System.out.println(user.getAccount());
+       User userCheck = userRepository.findByAccount(user.getAccount());
+      return userCheck;
+        }
+
+   @PostMapping("/register")
+    public Boolean register(@RequestBody User user)
+        { User userCheck=new User();
+        userCheck.setAccount(user.getAccount());
+        userCheck.setPassword(user.getPassword());
+        userCheck.setTime(new Date());
+        userCheck.setEmail(user.getEmail());
+        userCheck.setSex(user.getSex());
+        if(userRepository.save(userCheck)!=null)
+            return true;
+        else
+            return false;
+        }
+
+        @PostMapping("/register_check")
+        public Boolean  registerCheck(@RequestBody User user)
+        { User userCheck = userRepository.findByAccount(user.getName());
+            if(userCheck==null)
+                return true;
+            else
+                return false;
         }
 }
